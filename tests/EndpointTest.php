@@ -27,9 +27,10 @@ class EndpointTest extends TestCase
         $city = $this->faker->city();
         $state = $this->faker->stateAbbr();
         /** @var GetEndpointWithQuery $request */
-        $request = GetEndpointWithQuery::method('GET');
-        $request->path('get/query')
-            ->city($city)
+        $request = GetEndpointWithQuery::make()
+            ->method('GET')
+            ->path('get/query');
+        $request->city($city)
             ->state($state)
             ->setUpResponse()
             ->send();
@@ -42,7 +43,7 @@ class EndpointTest extends TestCase
     public function testPostJsonRequest()
     {
         /** @var PostJsonEndpoint $request */
-        $request = PostJsonEndpoint::method('post')->path('send/json');
+        $request = PostJsonEndpoint::make()->method('post')->path('send/json');
         $data = [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),

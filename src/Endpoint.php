@@ -16,6 +16,8 @@ class Endpoint extends Fluent
 
     protected string $path = '';
 
+    protected string $method = 'GET';
+
     public static function setConfig(Config $config): Config
     {
         return self::$config = $config;
@@ -32,7 +34,7 @@ class Endpoint extends Fluent
         if ($requestConfig instanceof ResponseInterface) {
             return $requestConfig;
         }
-        $response = $client->request($this->method ?? 'GET', $url, $requestConfig);
+        $response = $client->request($this->method, $url, $requestConfig);
         return $this->afterSend($response);
     }
 
@@ -53,6 +55,12 @@ class Endpoint extends Fluent
     protected function getPath(): string
     {
         return $this->path;
+    }
+
+    public function method(string $method): static
+    {
+        $this->method = $method;
+        return $this;
     }
 
     protected function getClient(): ClientInterface
