@@ -88,6 +88,11 @@ class Endpoint extends Fluent
         return $response;
     }
 
+    public static function make(array $attributes = []): static
+    {
+        return new static($attributes);
+    }
+
     public static function __callStatic(string $name, array $arguments)
     {
         $endpoint = new static;
