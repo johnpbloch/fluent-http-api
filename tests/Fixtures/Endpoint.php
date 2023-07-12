@@ -10,7 +10,7 @@ use GuzzleHttp\Psr7\Response;
 use JohnPBloch\FluentApi\Endpoint as BaseEndpoint;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class Endpoint extends BaseEndpoint
+class Endpoint extends BaseEndpoint
 {
     public MockHandler $mockHandler;
 

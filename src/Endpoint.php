@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use JohnPBloch\FluentApi\Exceptions\ApiNotInitializedException;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class Endpoint extends Fluent
+class Endpoint extends Fluent
 {
     protected static Config $config;
 
