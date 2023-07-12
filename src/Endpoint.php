@@ -4,6 +4,7 @@ namespace JohnPBloch\FluentApi;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Str;
 use JohnPBloch\FluentApi\Exceptions\ApiNotInitializedException;
@@ -49,9 +50,13 @@ abstract class Endpoint extends Fluent
     {
         $config = [];
         foreach (get_class_methods($this) as $method) {
-            if (preg_match('/^set(.+)RequestConfig$/', $method, $match)) {
-                $key = Str::snake($match[1]);
+            if (str_starts_with($method, 'setRequestConfig') && strlen($method) >= 20) {
+                $key = Str::snake(substr($method, 16));
                 $config[$key] = $this->{$method}($config[$key] ?? null);
+            } elseif (str_starts_with($method, 'mergeRequestConfig') && strlen($method) >= 22) {
+                $key = Str::snake(substr($method, 18));
+                $config[$key] = Arr::wrap($config[$key] ?? []);
+                $config[$key] = array_merge($config[$key], $this->{$method}());
             }
         }
         return $config;
