@@ -9,7 +9,8 @@ trait JsonEndpointTrait
     protected function mergeRequestConfigHeaders(): array
     {
         return [
-            'Accept' => 'application/json'
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
         ];
     }
 
