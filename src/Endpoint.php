@@ -76,4 +76,11 @@ abstract class Endpoint extends Fluent
     {
         return $response;
     }
+
+    public static function __callStatic(string $name, array $arguments)
+    {
+        $endpoint = new static;
+        $endpoint->{$name}(...$arguments);
+        return $endpoint;
+    }
 }
