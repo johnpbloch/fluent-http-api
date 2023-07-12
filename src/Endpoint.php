@@ -27,6 +27,9 @@ abstract class Endpoint extends Fluent
         $requestConfig = $this->getRequestConfig();
         $requestConfig = $config->getAuth()->addAuthToRequestConfig($requestConfig);
         $requestConfig = $this->beforeSend($requestConfig);
+        if ($requestConfig instanceof ResponseInterface) {
+            return $requestConfig;
+        }
         $response = $client->request($this->method ?? 'GET', $url, $requestConfig);
         return $this->afterSend($response);
     }
@@ -64,7 +67,7 @@ abstract class Endpoint extends Fluent
         return $config;
     }
 
-    protected function beforeSend(array $requestConfig): array
+    protected function beforeSend(array $requestConfig): array|ResponseInterface
     {
         return $requestConfig;
     }
