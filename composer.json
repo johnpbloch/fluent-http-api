@@ -15,6 +15,11 @@
             "JohnPBloch\\FluentApi\\": "./src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "JohnPBloch\\FluentApi\\Tests\\": "./tests"
+        }
+    },
     "license": "MIT",
     "config": {
       "preferred-install": "dist",
