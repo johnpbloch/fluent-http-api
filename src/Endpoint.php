@@ -14,6 +14,8 @@ abstract class Endpoint extends Fluent
 {
     protected static Config $config;
 
+    protected string $path = '';
+
     public static function setConfig(Config $config): Config
     {
         return self::$config = $config;
@@ -42,7 +44,16 @@ abstract class Endpoint extends Fluent
         return self::$config;
     }
 
-    abstract protected function getPath(): string;
+    public function path(string $path): static
+    {
+        $this->path = $path;
+        return $this;
+    }
+
+    protected function getPath(): string
+    {
+        return $this->path;
+    }
 
     protected function getClient(): ClientInterface
     {

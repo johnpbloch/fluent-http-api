@@ -14,11 +14,6 @@ abstract class Endpoint extends BaseEndpoint
 {
     public MockHandler $mockHandler;
 
-    protected function getPath(): string
-    {
-        return $this->get('path', '');
-    }
-
     protected function getClient(): ClientInterface
     {
         return new Client(['handler' => HandlerStack::create($this->getMockHandler())]);
