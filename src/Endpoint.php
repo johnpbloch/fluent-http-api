@@ -52,7 +52,9 @@ abstract class Endpoint extends Fluent
         foreach (get_class_methods($this) as $method) {
             if (str_starts_with($method, 'setRequestConfig') && strlen($method) >= 20) {
                 $key = Str::snake(substr($method, 16));
-                $config[$key] = $this->{$method}($config[$key] ?? null);
+                $value = $this->{$method}($config[$key] ?? null);
+                if ($value !== null)
+                    $config[$key] = $value;
             } elseif (str_starts_with($method, 'mergeRequestConfig') && strlen($method) >= 22) {
                 $key = Str::snake(substr($method, 18));
                 $config[$key] = Arr::wrap($config[$key] ?? []);
