@@ -1,0 +1,18 @@
+{
+    "name": "johnpbloch/fluent-http-api",
+    "description": "A general purpose fluent API wrapper",
+    "type": "library",
+    "require": {
+        "php": ">=8.0.0",
+        "illuminate/support": "^9.0 || ^10.0",
+        "guzzlehttp/guzzle": "^7.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0 || ^10.0"
+    },
+    "license": "MIT",
+    "config": {
+      "preferred-install": "dist",
+      "sort-packages": true
+    }
+}
