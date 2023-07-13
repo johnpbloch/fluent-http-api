@@ -70,7 +70,7 @@ class Endpoint extends Fluent
 
     protected function getRequestConfig(): array
     {
-        $config = [];
+        $config = $this->initialConfig();
         foreach (get_class_methods($this) as $method) {
             if (str_starts_with($method, 'setRequestConfig') && strlen($method) >= 20) {
                 $key = Str::snake(substr($method, 16));
@@ -84,6 +84,15 @@ class Endpoint extends Fluent
             }
         }
         return $config;
+    }
+
+    protected function initialConfig(): array
+    {
+        return match (strtoupper($this->method)) {
+            'GET' => ['query' => $this->getAttributes()],
+            'POST', 'PUT' => ['form_data' => $this->getAttributes()],
+            default => [],
+        };
     }
 
     protected function beforeSend(array $requestConfig): array|ResponseInterface

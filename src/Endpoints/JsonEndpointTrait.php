@@ -22,4 +22,9 @@ trait JsonEndpointTrait
             default => json_encode($body),
         };
     }
+
+    protected function setRequestConfigFormData(): bool
+    {
+        return false;
+    }
 }

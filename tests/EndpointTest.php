@@ -5,7 +5,7 @@ namespace JohnPBloch\FluentApi\Tests;
 use GuzzleHttp\Psr7\Response;
 use JohnPBloch\FluentApi\Auth\NullAuth;
 use JohnPBloch\FluentApi\Config;
-use JohnPBloch\FluentApi\Tests\Fixtures\GetEndpointWithQuery;
+use JohnPBloch\FluentApi\Tests\Fixtures\Endpoint;
 use JohnPBloch\FluentApi\Tests\Fixtures\PostJsonEndpoint;
 use JohnPBloch\FluentApi\Tests\Fixtures\SkipsSendEndpoint;
 use PHPUnit\Framework\TestCase;
@@ -26,13 +26,12 @@ class EndpointTest extends TestCase
     {
         $city = $this->faker->city();
         $state = $this->faker->stateAbbr();
-        /** @var GetEndpointWithQuery $request */
-        $request = GetEndpointWithQuery::make()
+        $request = Endpoint::make();
+        $request->setUpResponse()
             ->method('GET')
-            ->path('get/query');
-        $request->city($city)
+            ->path('get/query')
+            ->city($city)
             ->state($state)
-            ->setUpResponse()
             ->send();
         $lastRequest = $request->mockHandler->getLastRequest();
         $query = http_build_query(compact('city', 'state'), encoding_type: PHP_QUERY_RFC3986);
