@@ -75,8 +75,7 @@ class Endpoint extends Fluent
             if (str_starts_with($method, 'setRequestConfig') && strlen($method) >= 20) {
                 $key = Str::snake(substr($method, 16));
                 $value = $this->{$method}($config[$key] ?? null);
-                if ($value !== null)
-                    $config[$key] = $value;
+                $config[$key] = $value;
             } elseif (str_starts_with($method, 'mergeRequestConfig') && strlen($method) >= 22) {
                 $key = Str::snake(substr($method, 18));
                 $config[$key] = Arr::wrap($config[$key] ?? []);
@@ -90,7 +89,7 @@ class Endpoint extends Fluent
     {
         return match (strtoupper($this->method)) {
             'GET' => ['query' => $this->getAttributes()],
-            'POST', 'PUT' => ['form_data' => $this->getAttributes()],
+            'POST', 'PUT' => ['form_params' => $this->getAttributes()],
             default => [],
         };
     }

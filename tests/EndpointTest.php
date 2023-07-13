@@ -39,6 +39,24 @@ class EndpointTest extends TestCase
         $this->assertEquals('GET', $lastRequest->getMethod());
     }
 
+    public function testStandardPostRequest()
+    {
+        $title = implode(' ',$this->faker->words(6));
+        $content = '<p>' . implode('</p><p>', $this->faker->paragraphs(4)) . '</p>';
+        $request = Endpoint::make();
+        $request->setUpResponse()
+            ->method('POST')
+            ->path('article')
+            ->title($title)
+            ->content($content)
+            ->send();
+        $lastRequest = $request->mockHandler->getLastRequest();
+        $query = http_build_query(compact('title', 'content'));
+        $this->assertEquals('https://api.example.com/v2/article', (string)$lastRequest->getUri());
+        $this->assertEquals('POST', $lastRequest->getMethod());
+        $this->assertEquals($query, $lastRequest->getBody()->getContents());
+    }
+
     public function testPostJsonRequest()
     {
         /** @var PostJsonEndpoint $request */

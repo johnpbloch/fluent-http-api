@@ -23,8 +23,7 @@ trait JsonEndpointTrait
         };
     }
 
-    protected function setRequestConfigFormData(): bool
+    protected function setRequestConfigFormParams():void
     {
-        return false;
     }
 }
