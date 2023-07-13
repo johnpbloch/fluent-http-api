@@ -50,7 +50,7 @@ This package provides a number of methods of adding authorization to requests. *
 - [Bearer Token](#bearer-token-auth)
 - [Header Key/Value](#header-keyvalue-auth)
 - [Query Key/Value](#query-keyvalue-auth)
-- [Cookie-based auth](#query-keyvalue-auth)
+- [Cookie-based auth](#cookie-based-auth)
 
 ##### Basic Auth
 
