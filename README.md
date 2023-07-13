@@ -44,13 +44,13 @@ class MyConfig extends \JohnPBloch\FluentApi\Config
 
 This package provides a number of methods of adding authorization to requests. ***NOTE:*** This library does not handle authentication, it assumes you already have credentials available to use. The following methods of authorization are available:
 
-- Basic Auth
-- Digest Auth
-- NTLM Auth
-- Bearer Token
-- Header Key/Value
-- Query Key/Value
-- Cookie-based auth
+- [Basic Auth](#basic-auth)
+- [Digest Auth](#digest-auth)
+- [NTLM Auth](#ntlm-auth)
+- [Bearer Token](#bearer-token-auth)
+- [Header Key/Value](#header-keyvalue-auth)
+- [Query Key/Value](#query-keyvalue-auth)
+- [Cookie-based auth](#query-keyvalue-auth)
 
 ##### Basic Auth
 
