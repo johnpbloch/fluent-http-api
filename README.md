@@ -23,9 +23,13 @@ If you are incorporating this in a codebase meant to be used as a library (i.e. 
 
 class MyEndpoint extends \JohnPBloch\FluentApi\Endpoint
 {
-    public static function setConfig(Config $config): Config
+    public static function setConfig(\JohnPBloch\FluentApi\Config $config): \JohnPBloch\FluentApi\Config
     {
         return self::$config = $config;
+    }
+
+    protected function getConfig() : \JohnPBloch\FluentApi\Config {
+        return self::$config;
     }
 }
 
